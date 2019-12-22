@@ -38,6 +38,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+       
         $user = new employee();
         $user->name = $request->name;
         $user->address = $request->address;

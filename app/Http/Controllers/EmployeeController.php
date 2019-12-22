@@ -15,7 +15,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-       return view('employee.add');
+       return view('employee.addjob');
     }
 
     /**
@@ -36,16 +36,14 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new jobs();
+        $user = new job();
         $user->name = $request->name;
-        $user->address = $request->titel;
+        $user->titel = $request->titel;
         $user->address = $request->address;
-        $user->contract = $request->salary;
-        $user->username = $request->username;
-        $user->password = $request->password;
+        $user->salary = $request->salary;
        
         if($user->save()){
-            return redirect()->route('home.index');     
+            return redirect()->route('job.show');     
     }
 else
 {
@@ -59,9 +57,16 @@ else
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show(Request $request )
     {
-        //
+        $users = job::all();
+		
+        
+        if($request->session()->has('name')){
+    		   	return view('employee.jobshow')->with('users', $users);
+    	}else{
+    		return redirect()->route('login.index');
+    	}
     }
 
     /**
@@ -70,7 +75,7 @@ else
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
+    public function edit()
     {
         //
     }
@@ -82,7 +87,7 @@ else
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request)
     {
         //
     }
