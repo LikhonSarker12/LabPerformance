@@ -25,8 +25,8 @@ Route::group(['middleware'=>['session']], function(){
 
 	Route::group(['middleware'=>['admintype']], function(){
 		Route::get('/home/admin', 'HomeController@adminIndex')->name('adminhome.index');	
-		Route::get('/employee/add', 'EmployeeController@index')->name('employee.add');
-		Route::post('/employee/add', 'EmployeeController@store');
+		Route::get('/employee/add', 'AdminController@index')->name('admin.add');
+		Route::post('/employee/add', 'AdminController@store');
 
 		Route::get('/admin/employeelist', 'AdminController@show')->name('employee.list');
 		Route::get('/employee/edit/{id}', 'AdminController@update')->name('employee.edit');
@@ -42,13 +42,15 @@ Route::group(['middleware'=>['session']], function(){
 		});	
 		Route::group(['middleware'=>['customertype']], function(){
 		
-			Route::get('/home/customer', 'HomeController@customerIndex')->name('home.index');
-			Route::get('/medicines', 'CustomerController@index')->name('medicines.index');
-			Route::get('/customer/profile', 'CustomerController@index')->name('customer.profile');
+			Route::get('/home/employee', 'HomeController@customerIndex')->name('home.index');
+			Route::get('/job', 'EmployeeController@index')->name('job.add');
+			Route::post('/job', 'EmployeeController@store');
+			Route::get('/show', 'EmployeeController@show')->name('job.show');
+			Route::get('/job/edit/{id}', 'EmployeeController@edit')->name('job.edit');
 		
-			Route::get('/customer/profile', 'AdminController@index')->name('customer.profile');
+			Route::get('/job/details/{id}', 'EmployeeController@index')->name('jod.details');
 		
-			Route::post('/deleate/custome/{id}', 'HomeController@index')->name('customer.id');
+			Route::post('/job/delete/{id}', 'EmployeeController@index')->name('job.delete');
 		
 			});	
 		
